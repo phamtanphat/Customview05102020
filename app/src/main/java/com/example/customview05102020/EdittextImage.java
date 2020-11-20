@@ -10,7 +10,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-public class EdittextImage extends RelativeLayout {
+public class EdittextImage extends RelativeLayout{
     private TextView mTitle;
     private ImageView mImg;
     private EditText mEdt;
@@ -19,6 +19,7 @@ public class EdittextImage extends RelativeLayout {
     private Integer mTextSize;
     private Integer mSrcImage;
 
+    private OnEditTextClickListener mOnEditTextClickListener;
     public EdittextImage(Context context) {
         super(context);
     }
@@ -45,8 +46,10 @@ public class EdittextImage extends RelativeLayout {
 
             initView(v);
             mapView();
+            event();
         }
     }
+
     private void initView(View v) {
         mEdt = v.findViewById(R.id.edittext);
         mImg = v.findViewById(R.id.imageView);
@@ -56,5 +59,17 @@ public class EdittextImage extends RelativeLayout {
         mTitle.setText(mTextTitle);
         mTitle.setTextSize((float) mTextSize);
         mImg.setImageResource(mSrcImage);
+    }
+    private void event() {
+        mTitle.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mOnEditTextClickListener.onCliCkTitle(v);
+            }
+        });
+    }
+
+    public void setOnClickTitle(OnEditTextClickListener mOnEditTextClickListener){
+        this.mOnEditTextClickListener = mOnEditTextClickListener;
     }
 }
